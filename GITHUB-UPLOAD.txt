@@ -1,1 +1,1 @@
-Upload the files at this level directly to the root of your GitHub repository. Do not put them inside another NEON-LUXE folder.
+Upload these files directly to the GitHub repository root: index.html, style.css, script.js, products.js, README.md. Do NOT create another outer project folder.

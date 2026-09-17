@@ -1,54 +1,35 @@
-# NEON LUXE — Render-ready e-commerce frontend
+# NEON LUXE Marketplace — GitHub + Render Ready
 
-## Upload structure
-This ZIP opens directly at the project root. There is no extra outer project folder.
+This version expands the existing NEON LUXE frontend into a multi-vendor marketplace UI inspired by common marketplace/e-commerce patterns.
 
-Root files:
-- `index.html`
-- `style.css`
-- `script.js`
-- `README.md`
-- `GITHUB-UPLOAD.txt`
+Included:
+- 960 product records
+- Responsive desktop/tablet/mobile design
+- Advanced search, filters, sorting and categories
+- Favourites, saved searches, compare and recently viewed
+- Product details, reviews and seller profiles
+- Cart, vouchers and checkout UI
+- Card/bank transfer/USSD-wallet/cash-on-delivery payment choices (UI)
+- Orders and tracking UI
+- Buyer protection/trust UI
+- Seller listing creation
+- Seller dashboard
+- Seller chat and offers
+- Notifications
+- Admin control center UI
+- Delivery/pickup concepts
+- LocalStorage persistence for demo data
+- No build command required
 
-## GitHub
-Upload the root files directly into the main branch. Do not create another NEON-LUXE folder inside the repository.
+IMPORTANT:
+This is a production-style frontend/demo marketplace, not a completed financial backend. Real authentication, database, image uploads, KYC, payment processing, escrow, seller payouts, logistics APIs, real-time chat, email/SMS, fraud controls and server-side order processing must be connected through a secure backend. Never put private payment/API secrets in frontend JavaScript.
 
-## Render
-Create a **Static Site** from the GitHub repository.
-- Branch: `main`
-- Root Directory: leave empty
-- Build Command: leave empty
-- Publish Directory: `.`
-- Auto Deploy: enabled
+DEPLOY:
+Upload ALL four files directly to the root of your existing GitHub repository:
+index.html
+style.css
+script.js
+products.js
+README.md
 
-## Included
-- Responsive/adaptive layout for desktop, tablet and mobile
-- Landing/hero section
-- 960 product records across 12 categories
-- Search
-- Category filtering
-- Price filtering
-- Sorting
-- Pagination
-- Product quick view
-- Wishlist stored in localStorage
-- Shopping cart stored in localStorage
-- Checkout UI
-- Payment method selection UI
-- Newsletter UI
-- Mobile navigation
-- Dark futuristic neon green/gold/blue/pink visual system
-- No framework/build step required
-
-## Production integrations still required
-The frontend is complete as a static storefront UI, but real commerce requires secure backend services for:
-- Real payment processing and payment verification
-- Server-side orders
-- User authentication/accounts
-- Inventory and product database
-- Shipping/tax calculation
-- Admin dashboard
-- Transactional email/SMS
-- Secure secrets/API keys
-
-Never put private payment/API secrets in `script.js` or other frontend files.
+Then commit directly to main. If your existing Render service is connected to that repository, it should redeploy automatically.
