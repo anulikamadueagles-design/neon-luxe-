@@ -33,3 +33,7 @@ products.js
 README.md
 
 Then commit directly to main. If your existing Render service is connected to that repository, it should redeploy automatically.
+
+
+## Button/interaction fixes
+All major navigation, marketplace, modal, cart, seller, account, comparison, favourites, chat and checkout controls are wired to JavaScript handlers. Real payment/account/KYC/delivery integrations still require backend services.

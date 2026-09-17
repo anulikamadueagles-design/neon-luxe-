@@ -102,7 +102,12 @@ function publishListing(){
  const name=document.getElementById('liTitle').value.trim(),price=Number(document.getElementById('liPrice').value);if(!name||!price)return toast('Enter a title and price');
  state.listings.unshift({name,price,oldPrice:price*1.15,rating:5,reviews:0,color:'Green',badge:'NEW',category:document.getElementById('liCat').value,condition:document.getElementById('liCondition').value,location:document.getElementById('liLocation').value,description:document.getElementById('liDesc').value,seller:'My Store'});
  save('nl_listings',state.listings);state.notifications.unshift('Listing published');save('nl_notifications',state.notifications);closeModal();applyFilters();toast('Listing published')}
-function openSellerDashboard(){openModal(`<h2>Seller Center</h2><div class="grid-3"><div class="stat-card"><strong>${state.listings.length}</strong>Listings</div><div class="stat-card"><strong>₦0</strong>Revenue</div><div class="stat-card"><strong>0</strong>Orders</div></div><div class="tabs"><button class="active">Products</button><button>Orders</button><button>Messages</button><button>Analytics</button><button>Payouts</button></div>${state.listings.length?state.listings.map((p,i)=>`<div class="list-row"><span>${esc(p.name)}<br><small>${Naira(p.price)} • ${esc(p.location)}</small></span><button class="ghost" onclick="state.listings.splice(${i},1);save('nl_listings',state.listings);openSellerDashboard();applyFilters()">Delete</button></div>`).join(''):'<div class="empty">You have no listings. Create your first listing.</div>}<button class="primary" onclick="openSeller()">＋ New listing</button>`,true)}
+function openSellerDashboard(){
+ let rows=state.listings.map((p,i)=>'<div class="list-row"><span>'+esc(p.name)+'<br><small>'+Naira(p.price)+' • '+esc(p.location)+'</small></span><button class="ghost" onclick="deleteListing('+i+')">Delete</button></div>').join('');
+ if(!rows) rows='<div class="empty">You have no listings. Create your first listing.</div>';
+ openModal('<h2>Seller Center</h2><div class="grid-3"><div class="stat-card"><strong>'+state.listings.length+'</strong>Listings</div><div class="stat-card"><strong>₦0</strong>Revenue</div><div class="stat-card"><strong>0</strong>Orders</div></div><div class="tabs"><button class="active">Products</button><button onclick="toast(\'Seller orders ready for backend\')">Orders</button><button onclick="openChats()">Messages</button><button onclick="toast(\'Analytics ready for backend\')">Analytics</button><button onclick="toast(\'Payouts require payment backend\')">Payouts</button></div>'+rows+'<button class="primary" onclick="openSeller()">＋ New listing</button>',true);
+}
+function deleteListing(i){state.listings.splice(i,1);save('nl_listings',state.listings);openSellerDashboard();applyFilters()}
 function openAdmin(){openModal(`<h2>Admin Control Center</h2><div class="grid-3"><div class="stat-card"><strong>${allProducts().length}</strong>Products</div><div class="stat-card"><strong>${state.listings.length}</strong>Seller listings</div><div class="stat-card"><strong>${state.orders.length}</strong>Orders</div></div><div class="form-card"><h3>Moderation</h3><p>✓ Product approval<br>✓ Seller verification<br>✓ Reports & disputes<br>✓ Reviews moderation<br>✓ Promotions & coupons<br>✓ Platform analytics</p><button class="ghost" onclick="toast('Admin tools are ready for backend connection')">Open moderation</button></div>`,true)}
 function openNotifications(){state.notifications=[];save('nl_notifications',state.notifications);updateCounts();openModal(`<h2>🔔 Notifications</h2><div class="empty">No unread notifications.</div>`)}
 function renderNotifications(){}
@@ -114,3 +119,6 @@ function showInfo(type){
  openModal(`<h2>${data[0]}</h2><p>${data[1]}</p><button class="primary" onclick="closeModal()">Continue</button>`)
 }
 init();
+
+document.addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
